@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — Ratul Shee Portfolio CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div class="admin-toast-container" id="adminToastContainer"></div>
+
+  <!-- LOGIN VIEW -->
+  <div class="login-view" id="loginView">
+    <div class="login-card">
+      <div class="login-badge">
+        <span class="pulse-dot"></span> <span>SECURE ACCESS GATEWAY</span>
+      </div>
+      <h2>Portfolio CMS Portal</h2>
+      <p class="login-sub">Authenticate to manage content, projects &amp; email dispatch.</p>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="adminUsername">Username</label>
+          <input type="text" id="adminUsername" class="admin-input" placeholder="admin" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" class="admin-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-admin-primary" id="loginBtn">
+          <span>Authenticate Session ➔</span>
+        </button>
+      </form>
+      <div class="login-alert" id="loginAlert"></div>
+      <div class="login-hint">Default Dev Credentials: <code>admin</code> / <code>admin123</code></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD MAIN VIEW -->
+  <div class="dashboard-view" id="dashboardView" style="display: none;">
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <div class="admin-brand">
+          <span class="brand-bracket">&lt;</span><span class="brand-name">Ratul</span><span class="brand-accent">.CMS</span><span class="brand-bracket">/&gt;</span>
+        </div>
+        <span class="system-status-pill">● Cloud DB Live</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-item active" data-tab="overview">
+          <span class="nav-icon">📊</span> <span>Overview &amp; Stats</span>
+        </button>
+        <button class="nav-item" data-tab="profile">
+          <span class="nav-icon">👤</span> <span>Profile &amp; Bio</span>
+        </button>
+        <button class="nav-item" data-tab="projects">
+          <span class="nav-icon">🚀</span> <span>Projects Manager</span>
+        </button>
+        <button class="nav-item" data-tab="skills">
+          <span class="nav-icon">🛠️</span> <span>Skills &amp; Tech</span>
+        </button>
+        <button class="nav-item" data-tab="timeline">
+          <span class="nav-icon">🎓</span> <span>Timeline &amp; Edu</span>
+        </button>
+        <button class="nav-item" data-tab="messages">
+          <span class="nav-icon">📬</span> <span>Inquiries Inbox</span>
+          <span class="unread-badge" id="unreadBadge">0</span>
+        </button>
+        <button class="nav-item" data-tab="settings">
+          <span class="nav-icon">⚙️</span> <span>Settings &amp; Gmail</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/" target="_blank" class="view-site-link">🌐 View Public Portfolio</a>
+        <button class="logout-btn" id="logoutBtn">🚪 Terminate Session</button>
+      </div>
+    </aside>
+
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="main-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="Toggle menu">☰</button>
+          <div>
+            <h1 id="tabTitle">Overview Dashboard</h1>
+            <span class="topbar-sub" id="tabSubtitle">Real-time statistics, inquiries, and email dispatch</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn-compose-topbar" id="topbarComposeBtn">
+            <span>✉️ Compose</span>
+          </button>
+          <a href="/" target="_blank" class="btn-topbar-link">Live Site ↗</a>
+        </div>
+      </header>
+
+      <div class="admin-content-body">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section class="tab-content active" id="tab-overview">
+          <div class="stats-cards-grid">
+            <div class="stat-card">
+              <span class="stat-icon">🚀</span>
+              <div>
+                <span class="stat-label">Total Projects</span>
+                <h3 class="stat-number" id="statProjects">0</h3>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🛠️</span>
+              <div>
+                <span class="stat-label">Active Skills</span>
+                <h3 class="stat-number" id="statSkills">0</h3>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🎓</span>
+              <div>
+                <span class="stat-label">Timeline Entries</span>
+                <h3 class="stat-number" id="statTimeline">0</h3>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">📬</span>
+              <div>
+                <span class="stat-label">Visitor Inquiries</span>
+                <h3 class="stat-number" id="statMessages">0</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Chart -->
+          <div class="admin-section-box">
+            <div class="box-header">
+              <h3>📈 Inquiries &amp; Pipeline Activity Stream</h3>
+              <span class="badge-tag">MongoDB Aggregated</span>
+            </div>
+            <div class="chart-container">
+              <div class="chart-bars-wrap" id="chartBars">
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 40%;"></div><span>Mon</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 65%;"></div><span>Tue</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 30%;"></div><span>Wed</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 85%;"></div><span>Thu</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 50%;"></div><span>Fri</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 90%;"></div><span>Sat</span></div>
+                <div class="chart-bar-col"><div class="chart-bar-fill" style="height: 75%;"></div><span>Sun</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Inquiries -->
+          <div class="admin-section-box">
+            <div class="box-header">
+              <h3>Recent Contact Inquiries</h3>
+              <button class="btn-text-action" onclick="document.querySelector('[data-tab=messages]').click()">View All Inquiries ➔</button>
+            </div>
+            <div class="recent-messages-table" id="recentMessagesTable">
+              <p class="empty-state">No inquiries received yet.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: PROFILE & BIO -->
+        <section class="tab-content" id="tab-profile">
+          <form id="profileForm" class="admin-form-grid">
+            <div class="form-panel">
+              <h3>Hero Presentation</h3>
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="profName" class="admin-input" required>
+              </div>
+              <div class="form-group">
+                <label>Eyebrow Greeting</label>
+                <input type="text" id="profEyebrow" class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Live Status Pill Text</label>
+                <input type="text" id="profStatusText" class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <input type="text" id="profLocation" class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Tagline / Headline</label>
+                <textarea id="profTagline" class="admin-textarea" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Default Theme Accent</label>
+                <select id="profTheme" class="admin-select">
+                  <option value="emerald">🟢 Emerald Matrix</option>
+                  <option value="violet">🟣 Cyber Violet</option>
+                  <option value="cyan">🔵 Electric Cyan</option>
+                  <option value="amber">🟠 Sunset Amber</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-panel">
+              <h3>Bento Metrics &amp; About Story</h3>
+              <div class="metrics-inputs-row">
+                <div class="form-group">
+                  <label>Languages Count (+)</label>
+                  <input type="number" id="profMetricLanguages" class="admin-input" min="1">
+                </div>
+                <div class="form-group">
+                  <label>Clean Code (%)</label>
+                  <input type="number" id="profMetricCleanCode" class="admin-input" min="1" max="100">
+                </div>
+                <div class="form-group">
+                  <label>Graduation Year</label>
+                  <input type="number" id="profMetricGradYear" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label>GitHub Repos (+)</label>
+                  <input type="number" id="profMetricRepos" class="admin-input" min="1">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Terminal "whoami" Response</label>
+                <textarea id="profTerminalWhoami" class="admin-textarea" rows="2"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Social Links</label>
+                <div class="social-inputs">
+                  <input type="url" id="profGithub" class="admin-input" placeholder="GitHub URL">
+                  <input type="url" id="profLinkedin" class="admin-input" placeholder="LinkedIn URL">
+                  <input type="url" id="profTwitter" class="admin-input" placeholder="Twitter/X URL">
+                  <input type="url" id="profFacebook" class="admin-input" placeholder="Facebook URL">
+                  <input type="email" id="profEmail" class="admin-input" placeholder="Email Address">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-admin-primary">
+                <span>Save Profile Changes 💾</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- TAB 3: PROJECTS MANAGER -->
+        <section class="tab-content" id="tab-projects">
+          <div class="tab-actions-bar">
+            <h3>Featured Portfolio Projects</h3>
+            <button class="btn-admin-primary" id="addNewProjectBtn">
+              <span>+ Add New Project</span>
+            </button>
+          </div>
+
+          <div class="projects-admin-grid" id="adminProjectsList"></div>
+
+          <!-- Project Edit/Create Modal -->
+          <div class="admin-modal-backdrop" id="projectEditModal">
+            <div class="admin-modal-box">
+              <div class="modal-top">
+                <h3 id="projectModalTitle">Add New Project</h3>
+                <button class="modal-close" onclick="closeProjectEditModal()">✕</button>
+              </div>
+              <form id="projectForm" class="admin-modal-form">
+                <input type="hidden" id="projId">
+                <div class="form-group">
+                  <label>Project Title *</label>
+                  <input type="text" id="projTitle" class="admin-input" required>
+                </div>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select id="projCategory" class="admin-select">
+                      <option value="mern">MERN Full-Stack</option>
+                      <option value="react">React / UI</option>
+                      <option value="ai">AI / API Tooling</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Display Order (Priority)</label>
+                    <input type="number" id="projOrder" class="admin-input" value="0">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description *</label>
+                  <textarea id="projDesc" class="admin-textarea" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Highlights (Comma separated)</label>
+                  <input type="text" id="projHighlights" class="admin-input" placeholder="JWT Auth, Real-time Charts, MongoDB Indexing">
+                </div>
+                <div class="form-group">
+                  <label>Tech Stack Tags (Comma separated)</label>
+                  <input type="text" id="projStack" class="admin-input" placeholder="React, Node.js, Express, MongoDB">
+                </div>
+                <div class="form-group">
+                  <label>Project Image</label>
+                  <div class="image-upload-row">
+                    <input type="text" id="projImageUrl" class="admin-input" placeholder="Image URL or filename (e.g. fintrack.jpg)">
+                    <label class="btn-file-upload">
+                      <span>Upload File 📁</span>
+                      <input type="file" id="projImageFile" accept="image/*" style="display: none;">
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label>Live Demo URL</label>
+                    <input type="url" id="projLiveUrl" class="admin-input" placeholder="https://...">
+                  </div>
+                  <div class="form-group">
+                    <label>GitHub Repo URL</label>
+                    <input type="url" id="projRepoUrl" class="admin-input" placeholder="https://github.com/...">
+                  </div>
+                </div>
+                <div class="modal-bottom-actions">
+                  <button type="button" class="btn-admin-ghost" onclick="closeProjectEditModal()">Cancel</button>
+                  <button type="submit" class="btn-admin-primary">Save Project</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: SKILLS MANAGER -->
+        <section class="tab-content" id="tab-skills">
+          <div class="tab-actions-bar">
+            <h3>Technical Skills &amp; Proficiency</h3>
+            <button class="btn-admin-primary" id="addNewSkillBtn">
+              <span>+ Add Skill</span>
+            </button>
+          </div>
+
+          <div class="skills-admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Skill Name</th>
+                  <th>Category</th>
+                  <th>Proficiency</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="skillsTableBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Skill Edit Modal -->
+          <div class="admin-modal-backdrop" id="skillModal">
+            <div class="admin-modal-box modal-sm">
+              <div class="modal-top">
+                <h3 id="skillModalTitle">Add Skill</h3>
+                <button class="modal-close" onclick="closeSkillModal()">✕</button>
+              </div>
+              <form id="skillForm" class="admin-modal-form">
+                <input type="hidden" id="skillId">
+                <div class="form-group">
+                  <label>Skill Name *</label>
+                  <input type="text" id="skillName" class="admin-input" required placeholder="e.g. React.js, Python, MongoDB">
+                </div>
+                <div class="form-group">
+                  <label>Category</label>
+                  <select id="skillCategory" class="admin-select">
+                    <option value="languages">Core Languages</option>
+                    <option value="frontend">Frontend Development</option>
+                    <option value="backend">Backend &amp; Database</option>
+                    <option value="tools">DevOps, Tools &amp; AI</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Proficiency: <span id="skillProfVal">85</span>%</label>
+                  <input type="range" id="skillProficiency" min="10" max="100" value="85" class="admin-slider">
+                </div>
+                <div class="modal-bottom-actions">
+                  <button type="button" class="btn-admin-ghost" onclick="closeSkillModal()">Cancel</button>
+                  <button type="submit" class="btn-admin-primary">Save Skill</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: TIMELINE & EDUCATION -->
+        <section class="tab-content" id="tab-timeline">
+          <div class="tab-actions-bar">
+            <h3>Academic Milestones</h3>
+            <button class="btn-admin-primary" id="addNewTimelineBtn">
+              <span>+ Add Milestone</span>
+            </button>
+          </div>
+
+          <div class="timeline-admin-list" id="timelineAdminList"></div>
+
+          <!-- Timeline Edit Modal -->
+          <div class="admin-modal-backdrop" id="timelineModal">
+            <div class="admin-modal-box">
+              <div class="modal-top">
+                <h3 id="timelineModalTitle">Add Education Milestone</h3>
+                <button class="modal-close" onclick="closeTimelineModal()">✕</button>
+              </div>
+              <form id="timelineForm" class="admin-modal-form">
+                <input type="hidden" id="timelineId">
+                <div class="form-group">
+                  <label>Institution Name *</label>
+                  <input type="text" id="timeInstitution" class="admin-input" required>
+                </div>
+                <div class="form-group">
+                  <label>Degree / Field *</label>
+                  <input type="text" id="timeDegree" class="admin-input" required>
+                </div>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label>Dates *</label>
+                    <input type="text" id="timeDates" class="admin-input" placeholder="e.g. 2024 — 2027" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Status Badge</label>
+                    <input type="text" id="timeBadge" class="admin-input" placeholder="In Progress / Completed">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea id="timeDesc" class="admin-textarea" rows="3"></textarea>
+                </div>
+                <div class="modal-bottom-actions">
+                  <button type="button" class="btn-admin-ghost" onclick="closeTimelineModal()">Cancel</button>
+                  <button type="submit" class="btn-admin-primary">Save Milestone</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6: MESSAGES & EMAIL DISPATCH -->
+        <section class="tab-content" id="tab-messages">
+          <div class="tab-actions-bar">
+            <div>
+              <h3>Visitor Contact Inquiries</h3>
+              <span style="font-size: 0.8rem; color: var(--text-dim);">Click "✉️ Reply" on any inquiry to send an email directly through your Gmail account.</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn-admin-primary" id="inboxComposeBtn">
+                <span>✉️ Compose New Email</span>
+              </button>
+              <button class="btn-admin-ghost" onclick="loadMessages()">🔄 Refresh</button>
+            </div>
+          </div>
+
+          <div class="messages-inbox-grid" id="messagesList"></div>
+        </section>
+
+        <!-- TAB 7: SETTINGS & GMAIL SMTP -->
+        <section class="tab-content" id="tab-settings">
+          <div class="settings-grid">
+
+            <!-- Gmail SMTP Configuration & Test -->
+            <div class="admin-section-box">
+              <div class="box-header">
+                <h3>📧 Gmail SMTP Email Dispatcher</h3>
+                <span class="badge-tag" id="smtpStatusBadge">Checking...</span>
+              </div>
+              <p class="setting-desc">Configure your Gmail address and Google App Password to enable sending emails and automated visitor alert notifications.</p>
+
+              <form id="gmailConfigForm" class="admin-form-vertical" style="margin-top: 16px;">
+                <div class="form-group">
+                  <label>Sender Gmail Account</label>
+                  <input type="email" id="smtpGmailUser" class="admin-input" value="ratulshee6@gmail.com" required>
+                </div>
+                <div class="form-group">
+                  <label>Google 16-Character App Password</label>
+                  <input type="password" id="smtpAppPass" class="admin-input" placeholder="e.g. abcd efgh ijkl mnop">
+                  <small style="color: var(--text-dim); font-size: 0.72rem; margin-top: 4px;">
+                    Generated via Google Account &gt; Security &gt; 2-Step Verification &gt; App Passwords.
+                  </small>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                  <button type="submit" class="btn-admin-primary">💾 Save SMTP Settings</button>
+                  <button type="button" class="btn-admin-ghost" id="testSmtpBtn">🚀 Send Test Email</button>
+                </div>
+              </form>
+
+              <!-- App Password Help Box -->
+              <div class="smtp-help-box" style="margin-top: 20px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); padding: 16px; border-radius: 8px;">
+                <strong style="color: var(--neon-blue); font-size: 0.85rem;">🔑 How to create a Google App Password:</strong>
+                <ol style="color: var(--text-dim); font-size: 0.8rem; margin: 8px 0 0 18px; padding: 0; line-height: 1.6;">
+                  <li>Visit <a href="https://myaccount.google.com/security" target="_blank" style="color: var(--neon-green); text-decoration: underline;">Google Account Security</a>.</li>
+                  <li>Enable <strong>2-Step Verification</strong> (if not already enabled).</li>
+                  <li>Go to <strong>App Passwords</strong> and generate a password named <code>Portfolio Admin</code>.</li>
+                  <li>Copy the 16-letter code and paste it into the field above!</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Password Change -->
+            <div class="admin-section-box">
+              <h3>Change Admin Password</h3>
+              <form id="passwordForm" class="admin-form-vertical" style="margin-top: 14px;">
+                <div class="form-group">
+                  <label>Current Password</label>
+                  <input type="password" id="currentPass" class="admin-input" required autocomplete="current-password">
+                </div>
+                <div class="form-group">
+                  <label>New Password</label>
+                  <input type="password" id="newPass" class="admin-input" required minlength="6" autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn-admin-primary" style="margin-top: 8px;">Update Password</button>
+              </form>
+            </div>
+
+            <!-- Database Backup & Restore -->
+            <div class="admin-section-box">
+              <h3>📦 Database Backup &amp; Restore</h3>
+              <p class="setting-desc">Download a complete JSON snapshot of all profile content, projects, skills, and messages, or restore from a previous backup file.</p>
+              
+              <div class="backup-actions-row">
+                <button class="btn-admin-ghost" id="exportBackupBtn">
+                  <span>📥 Export JSON Backup</span>
+                </button>
+
+                <label class="btn-admin-ghost">
+                  <span>📤 Restore Backup JSON</span>
+                  <input type="file" id="importBackupFile" accept=".json" style="display: none;">
+                </label>
+              </div>
+
+              <div class="danger-zone-box" style="margin-top: 24px;">
+                <h4>⚠️ Reset &amp; Seed Database</h4>
+                <p class="setting-desc">Restore original showcase content for Ratul Shee's portfolio.</p>
+                <button type="button" class="btn-danger" id="reseedDbBtn">Reset to Default Data</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- EMAIL COMPOSER MODAL -->
+  <div class="admin-modal-backdrop" id="emailComposerModal">
+    <div class="admin-modal-box">
+      <div class="modal-top">
+        <h3 id="composerModalTitle">✉️ Compose Email (via Gmail SMTP)</h3>
+        <button class="modal-close" onclick="closeEmailComposer()">✕</button>
+      </div>
+      <form id="emailComposerForm" class="admin-modal-form">
+        <div class="form-group">
+          <label>Recipient Email (To) *</label>
+          <input type="email" id="emailTo" class="admin-input" placeholder="client@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Recipient Name (Optional)</label>
+          <input type="text" id="emailRecipientName" class="admin-input" placeholder="e.g. John Doe">
+        </div>
+        <div class="form-group">
+          <label>Subject *</label>
+          <input type="text" id="emailSubject" class="admin-input" placeholder="Re: Project Inquiry — Full-Stack Development" required>
+        </div>
+        <div class="form-group">
+          <label>Message Body *</label>
+          <textarea id="emailBody" class="admin-textarea" rows="6" placeholder="Write your message here..." required></textarea>
+        </div>
+        <div class="modal-bottom-actions">
+          <button type="button" class="btn-admin-ghost" onclick="closeEmailComposer()">Cancel</button>
+          <button type="submit" class="btn-admin-primary" id="sendEmailSubmitBtn">
+            <span>Send Email via Gmail 🚀</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

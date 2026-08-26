@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratul Shee — Full-Stack MERN Developer &amp; Software Engineer</title>
+  <meta name="description" content="Portfolio of Ratul Shee — Full-Stack MERN Developer building high-performance web applications with React, Node.js, Express, MongoDB, and AI integrations.">
+  <meta name="keywords" content="Ratul Shee, MERN Stack Developer, Full Stack Web Developer, React Developer, Node.js, Express, MongoDB, Portfolio, Chandannagar">
+  <meta name="author" content="Ratul Shee">
+  <meta name="theme-color" content="#06090f">
+
+  <!-- Open Graph / Social Meta -->
+  <link rel="canonical" href="https://ratulshee.me">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ratulshee.me">
+  <meta property="og:title" content="Ratul Shee — Full-Stack MERN Developer">
+  <meta property="og:description" content="Engineering fast, scalable, and visually stunning full-stack applications with React, Node.js, Express, and MongoDB.">
+  <meta property="og:image" content="profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@RATUL_SHEE_666">
+  <meta name="twitter:title" content="Ratul Shee — Full-Stack MERN Developer">
+  <meta name="twitter:description" content="Engineering fast, scalable, and visually stunning full-stack applications.">
+  <meta name="twitter:image" content="profile.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2306090f'/%3E%3Cpath d='M30 35 L15 50 L30 65' stroke='%2339ff9c' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M70 35 L85 50 L70 65' stroke='%2338bdf8' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M58 28 L42 72' stroke='%23e2e8f0' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-emerald">
+
+  <!-- Ambient WebGL / Canvas Gravity Constellation -->
+  <canvas id="net-canvas" aria-hidden="true"></canvas>
+
+  <!-- Celebratory Confetti Canvas -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Background Aurora Glow Blobs -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+  </div>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+
+  <!-- Quick Toast Notification Box -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Theme Accent Switcher Modal / Dropdown -->
+  <div class="theme-popup" id="themePopup" aria-hidden="true">
+    <div class="theme-popup-header">
+      <span>Color Theme Accent</span>
+      <button class="theme-popup-close" id="themeCloseBtn">✕</button>
+    </div>
+    <div class="theme-options-grid">
+      <button class="theme-opt active" data-theme="emerald">
+        <span class="theme-swatch swatch-emerald"></span>
+        <span class="theme-opt-label">Emerald Matrix</span>
+      </button>
+      <button class="theme-opt" data-theme="violet">
+        <span class="theme-swatch swatch-violet"></span>
+        <span class="theme-opt-label">Cyber Violet</span>
+      </button>
+      <button class="theme-opt" data-theme="cyan">
+        <span class="theme-swatch swatch-cyan"></span>
+        <span class="theme-opt-label">Electric Cyan</span>
+      </button>
+      <button class="theme-opt" data-theme="amber">
+        <span class="theme-swatch swatch-amber"></span>
+        <span class="theme-opt-label">Sunset Amber</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Command Palette Modal (Ctrl + K / ⌘K) -->
+  <div class="cmd-palette-backdrop" id="cmdBackdrop" aria-hidden="true">
+    <div class="cmd-palette-box" role="dialog" aria-modal="true" aria-label="Command Palette">
+      <div class="cmd-input-wrap">
+        <svg viewBox="0 0 24 24" class="cmd-search-icon"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" id="cmdInput" class="cmd-input" placeholder="Type a command (e.g. projects, resume, copy email, theme)..." autocomplete="off">
+        <span class="cmd-kbd-badge">ESC</span>
+      </div>
+      <div class="cmd-results" id="cmdResults">
+        <div class="cmd-group-label">Navigation</div>
+        <div class="cmd-item" data-action="goto" data-target="#about">
+          <span class="cmd-item-icon">👤</span>
+          <span class="cmd-item-title">About &amp; Overview</span>
+          <span class="cmd-item-key">G A</span>
+        </div>
+        <div class="cmd-item" data-action="goto" data-target="#architecture">
+          <span class="cmd-item-icon">⚡</span>
+          <span class="cmd-item-title">MERN Architecture Simulator</span>
+          <span class="cmd-item-key">G M</span>
+        </div>
+        <div class="cmd-item" data-action="goto" data-target="#skills">
+          <span class="cmd-item-icon">🛠️</span>
+          <span class="cmd-item-title">Skills &amp; Tech Stack</span>
+          <span class="cmd-item-key">G S</span>
+        </div>
+        <div class="cmd-item" data-action="goto" data-target="#projects">
+          <span class="cmd-item-icon">🚀</span>
+          <span class="cmd-item-title">Featured Projects Showcase</span>
+          <span class="cmd-item-key">G P</span>
+        </div>
+        <div class="cmd-item" data-action="goto" data-target="#education">
+          <span class="cmd-item-icon">🎓</span>
+          <span class="cmd-item-title">Education &amp; Timeline</span>
+          <span class="cmd-item-key">G E</span>
+        </div>
+        <div class="cmd-item" data-action="goto" data-target="#contact">
+          <span class="cmd-item-icon">📬</span>
+          <span class="cmd-item-title">Contact &amp; Message</span>
+          <span class="cmd-item-key">G C</span>
+        </div>
+
+        <div class="cmd-group-label">Super Actions &amp; Tools</div>
+        <div class="cmd-item" data-action="open-resume">
+          <span class="cmd-item-icon">📄</span>
+          <span class="cmd-item-title">View Developer Resume / CV</span>
+          <span class="cmd-item-badge">Modal</span>
+        </div>
+        <div class="cmd-item" data-action="copy-email">
+          <span class="cmd-item-icon">📋</span>
+          <span class="cmd-item-title">Copy Email Address (ratulshee6@gmail.com)</span>
+          <span class="cmd-item-badge">Action</span>
+        </div>
+        <div class="cmd-item" data-action="toggle-theme-popup">
+          <span class="cmd-item-icon">🎨</span>
+          <span class="cmd-item-title">Change Theme Accent Color</span>
+          <span class="cmd-item-badge">Palette</span>
+        </div>
+        <div class="cmd-item" data-action="fire-confetti">
+          <span class="cmd-item-icon">🎉</span>
+          <span class="cmd-item-title">Fire Celebratory Confetti Cannon</span>
+          <span class="cmd-item-badge">Fun</span>
+        </div>
+        <div class="cmd-item" data-action="toggle-sound">
+          <span class="cmd-item-icon">🔊</span>
+          <span class="cmd-item-title">Toggle Sci-Fi Sound Effects</span>
+          <span class="cmd-item-badge">Audio</span>
+        </div>
+        <div class="cmd-item" data-action="open-admin">
+          <span class="cmd-item-icon">⚡</span>
+          <span class="cmd-item-title">Open CMS Admin Portal (/admin)</span>
+          <span class="cmd-item-badge">Admin</span>
+        </div>
+      </div>
+      <div class="cmd-footer">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Developer Resume / CV Modal -->
+  <div class="resume-modal-backdrop" id="resumeModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="resume-modal-card">
+      <div class="resume-topbar">
+        <div class="resume-badge">📄 Developer Resume / Curriculum Vitae</div>
+        <div class="resume-actions-top">
+          <button class="btn btn-ghost btn-sm" onclick="window.print()">🖨️ Print CV</button>
+          <button class="modal-close-btn" id="resumeCloseBtn" aria-label="Close resume modal">✕</button>
+        </div>
+      </div>
+
+      <div class="resume-sheet">
+        <header class="resume-header">
+          <div>
+            <h2 class="resume-name">Ratul Shee</h2>
+            <p class="resume-title">Full-Stack MERN Developer &amp; Software Engineer</p>
+            <p class="resume-contact-line">
+              📍 Chandannagar, West Bengal, India &nbsp;|&nbsp; ✉️ ratulshee6@gmail.com &nbsp;|&nbsp; 🌐 ratulshee.me &nbsp;|&nbsp; 💻 github.com/Ratul-Shee
+            </p>
+          </div>
+        </header>
+
+        <section class="resume-section">
+          <h3>Professional Summary</h3>
+          <p>
+            Results-driven <strong>Full-Stack MERN Developer</strong> specializing in building scalable web applications, responsive user interfaces, and high-throughput backend services using <strong>React.js, Node.js, Express, and MongoDB</strong>. Proven expertise in designing RESTful API architectures, JWT-based authentication security, database indexing, and integrating modern AI workflows. Committed to writing clean, maintainable code with high performance and seamless user experiences.
+          </p>
+        </section>
+
+        <section class="resume-section">
+          <h3>Technical Competencies</h3>
+          <div class="resume-skills-grid">
+            <div><strong>Frontend Engineering:</strong> React 18, Redux Toolkit, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Responsive Web Design, Single Page Applications (SPA)</div>
+            <div><strong>Backend &amp; Middleware:</strong> Node.js, Express.js, RESTful API Gateway, JWT Authentication, bcrypt Hashing, Rate Limiting, Centralized Error Handling</div>
+            <div><strong>Databases &amp; Architecture:</strong> MongoDB, Mongoose ODM, Schema Validation, Aggregation Pipelines, Compound Indexing, NoSQL Architecture</div>
+            <div><strong>Developer Tools &amp; AI:</strong> Git, GitHub, Postman API Testing Suite, Vite, Web Audio API, HTML5 Canvas, Generative AI &amp; LLM API Integrations</div>
+          </div>
+        </section>
+
+        <section class="resume-section">
+          <h3>Featured Full-Stack Projects</h3>
+
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <strong>FinTrack — Personal Expense &amp; Financial Health Tracker</strong>
+              <span>React, Node.js, Express, MongoDB</span>
+            </div>
+            <p>
+              • Built a full-stack personal finance application featuring secure JWT authentication, session management, and encrypted user credentials.<br>
+              • Implemented dynamic category spending analytics and interactive monthly burn-down visual charts with sub-30ms database queries.<br>
+              • Designed modular REST API endpoints with input sanitization and schema-enforced validation pipelines.
+            </p>
+          </div>
+
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <strong>DevPulse — Content Studio &amp; Markdown CMS Suite</strong>
+              <span>React, Node.js, Express, MongoDB</span>
+            </div>
+            <p>
+              • Architected a real-time developer publishing platform with synchronized split-view Markdown authoring and syntax highlighting.<br>
+              • Implemented multi-tier Role-Based Access Control (RBAC) guards for draft approvals, slug generation, and full-text search indexing.<br>
+              • Engineered automated SEO metadata extraction and high-performance document aggregation.
+            </p>
+          </div>
+
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <strong>PromptMatrix — AI Prompt Workbench &amp; Workflow Accelerator</strong>
+              <span>React, Node.js, REST APIs</span>
+            </div>
+            <p>
+              • Developed an interactive AI prompt engineering studio allowing developers to test, benchmark, and optimize LLM prompt chains.<br>
+              • Implemented prompt version history, token counter metrics, customizable template presets, and one-click JSON exporting.
+            </p>
+          </div>
+        </section>
+
+        <section class="resume-section">
+          <h3>Education &amp; Academic Background</h3>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <strong>Supreme Knowledge Foundation Group of Institutions (SKFGI)</strong>
+              <span>2024 — 2027</span>
+            </div>
+            <p>
+              Bachelor of Technology (B.Tech) in Computer Systems &amp; Software Engineering.<br>
+              <em>Core Coursework:</em> Data Structures &amp; Algorithms, Database Management Systems (DBMS), Object-Oriented Programming, Web Engineering.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Quick-Look Modal -->
+  <div class="project-modal-backdrop" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="project-modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <div class="modal-image-wrap">
+        <img id="modalImg" src="" alt="Project Preview" class="modal-img">
+        <div class="modal-badge-pill" id="modalCategory">Full-Stack MERN</div>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalTitle" class="modal-title">Project Title</h3>
+        <p id="modalSubtitle" class="modal-subtitle">Project Subtitle</p>
+        <div class="modal-section">
+          <h4>Architecture &amp; Key Solutions</h4>
+          <ul id="modalFeatures" class="modal-features-list"></ul>
+        </div>
+        <div class="modal-section">
+          <h4>Tech Stack</h4>
+          <div id="modalStack" class="modal-stack-tags"></div>
+        </div>
+        <div class="modal-actions">
+          <a id="modalLiveBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+            <span>Live Interactive Demo ↗</span>
+          </a>
+          <a id="modalRepoBtn" href="#" target="_blank" rel="noopener" class="btn btn-ghost">
+            <span>Source Code (GitHub)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP NAVIGATION -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo magnetic" aria-label="Ratul Shee Homepage">
+        <span class="logo-bracket">&lt;</span><span class="logo-name">Ratul</span><span class="logo-accent">.Shee</span><span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="#about" class="nav-link"><span class="nav-idx">01</span>about</a>
+        <a href="#architecture" class="nav-link"><span class="nav-idx">02</span>architecture</a>
+        <a href="#skills" class="nav-link"><span class="nav-idx">03</span>skills</a>
+        <a href="#projects" class="nav-link"><span class="nav-idx">04</span>projects</a>
+        <a href="#education" class="nav-link"><span class="nav-idx">05</span>timeline</a>
+        <a href="#contact" class="nav-link"><span class="nav-idx">06</span>contact</a>
+        <a href="#contact" class="nav-drawer-cta btn btn-primary btn-sm"><span>Let's Talk 💬</span></a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Accent Switcher Trigger -->
+        <button class="theme-trigger-btn magnetic" id="themeTriggerBtn" aria-label="Change Color Theme" title="Switch Theme Accent">
+          <span class="theme-dot-preview" id="themeDotPreview"></span>
+          <span class="theme-label-txt">Theme</span>
+        </button>
+
+        <!-- Command Menu Trigger -->
+        <button class="cmd-trigger-btn magnetic" id="cmdTriggerBtn" aria-label="Open Command Menu (Ctrl+K)">
+          <svg viewBox="0 0 24 24" class="search-mini-icon"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="cmd-trigger-text">Search</span>
+          <span class="cmd-key-combo">⌘K</span>
+        </button>
+
+        <!-- Sound FX Audio Button -->
+        <button class="sound-toggle-btn magnetic" id="soundToggleBtn" aria-label="Toggle sound effects" title="Toggle audio effects">
+          <div class="sound-bars" id="soundBars">
+            <span class="sbar"></span><span class="sbar"></span><span class="sbar"></span><span class="sbar"></span>
+          </div>
+          <span class="sound-label" id="soundLabel">SFX: OFF</span>
+        </button>
+
+        <!-- Contact CTA -->
+        <a href="#contact" class="nav-cta magnetic">Let's Talk</a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+
+        <!-- Live Status Pill -->
+        <div class="status-radar-pill" data-reveal>
+          <span class="radar-dot"><span class="radar-ping"></span></span>
+          <span class="status-text">Available for Full-Stack Roles &amp; Freelance</span>
+          <span class="location-badge">📍 India (IST)</span>
+        </div>
+
+        <!-- Interactive Terminal Window -->
+        <div class="hero-terminal" data-reveal id="heroTerminal">
+          <div class="term-topbar">
+            <div class="term-dots">
+              <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+            </div>
+            <span class="term-title">ratul@fullstack: ~/portfolio (zsh)</span>
+            <span class="term-hint">Type "help" for commands</span>
+          </div>
+          <div class="term-body" id="termBody">
+            <div class="term-output-history" id="termHistory">
+              <p class="term-line"><span class="prompt">guest@ratul-dev:~$</span> <span class="cmd-text">whoami</span></p>
+              <p class="term-response text-green" id="heroTyped"></p>
+            </div>
+            <div class="term-input-line">
+              <span class="prompt">guest@ratul-dev:~$</span>
+              <input type="text" id="termInput" class="term-input" placeholder="type 'help', 'skills', 'projects', 'hire'..." autocomplete="off" spellcheck="false">
+              <span class="term-cursor">_</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grand Title -->
+        <h1 class="hero-title" data-reveal>
+          <span class="hero-eyebrow">Hello World, I'm</span>
+          <span class="hero-name-gradient">Ratul Shee</span>
+        </h1>
+
+        <!-- Role Badge Matrix -->
+        <div class="hero-roles-wrap" data-reveal>
+          <span class="hero-role-badge mern-badge">
+            <svg viewBox="0 0 24 24" class="badge-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            MERN Stack Developer
+          </span>
+          <span class="hero-role-badge fullstack-badge">
+            <svg viewBox="0 0 24 24" class="badge-icon"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Full-Stack Architect
+          </span>
+          <span class="hero-role-badge ai-badge">
+            <svg viewBox="0 0 24 24" class="badge-icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/></svg>
+            AI Integrations
+          </span>
+        </div>
+
+        <!-- Description Tagline -->
+        <p class="hero-tagline" data-reveal>
+          Architecting robust web systems with <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong>, and <strong>Node.js</strong>.
+          Turning complex business logic into lightning-fast, pixel-perfect user experiences.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="hero-actions" data-reveal>
+          <a href="#projects" class="btn btn-primary magnetic" id="heroViewProjectsBtn">
+            <span class="btn-text">Explore Projects</span>
+            <svg viewBox="0 0 24 24" class="btn-icon"><path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <button class="btn btn-ghost magnetic" id="heroResumeBtn">
+            <span class="btn-text">View Resume / CV 📄</span>
+          </button>
+          <button class="btn btn-glass magnetic copy-email-btn" data-email="ratulshee6@gmail.com">
+            <svg viewBox="0 0 24 24" class="btn-icon"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="btn-text">Copy Email</span>
+          </button>
+        </div>
+
+        <!-- Floating Social Hub -->
+        <div class="hero-socials" data-reveal>
+          <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" aria-label="GitHub Profile" class="social-orb magnetic" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/ratul-shee/" target="_blank" rel="noopener" aria-label="LinkedIn Profile" class="social-orb magnetic" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.4 20.4h-3.5v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2 2 0 110-4 2 2 0 010 4zM7 20.4H3.6V9H7v11.4z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/ratul.shee.6/" target="_blank" rel="noopener" aria-label="Facebook Profile" class="social-orb magnetic" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>
+          </a>
+          <a href="https://x.com/RATUL_SHEE_666" target="_blank" rel="noopener" aria-label="Twitter / X Profile" class="social-orb magnetic" title="Twitter / X">
+            <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.6 22H1.5l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
+          </a>
+          <a href="mailto:ratulshee6@gmail.com" aria-label="Email Ratul" class="social-orb magnetic" title="Email">
+            <svg viewBox="0 0 24 24"><path d="M2 5h20a1 1 0 011 1v12a1 1 0 01-1 1H2a1 1 0 01-1-1V6a1 1 0 011-1zm1.5 2.4V17h17V7.4l-8.5 5.9-8.5-5.9zM4 6l8 5.6L20 6H4z"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION (BENTO GRID) -->
+    <section class="section" id="about">
+      <div class="section-inner">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow"><span class="idx">01</span> about me</span>
+          <h2>Crafting modern full-stack systems from database to interactive UI.</h2>
+          <p class="section-lead">A blend of clean code, responsive aesthetics, and reliable backend services.</p>
+        </div>
+
+        <div class="bento-grid">
+
+          <!-- Bento 1: Primary Narrative -->
+          <div class="bento-card bento-hero-story" data-reveal>
+            <div class="bento-header">
+              <span class="bento-badge">Full-Stack Story</span>
+              <span class="bento-tag">#DeveloperLife</span>
+            </div>
+            <h3>Building high-efficiency apps that scale.</h3>
+            <p>
+              I am <strong>Ratul Shee</strong>, a MERN Stack Developer based in Chandannagar, West Bengal, India.
+              I specialize in architecting responsive Single Page Applications in <strong>React</strong> backed by high-throughput RESTful services in <strong>Node.js</strong> &amp; <strong>Express</strong>, powered by schema-optimized <strong>MongoDB</strong> databases.
+            </p>
+            <p>
+              Beyond the core MERN stack, I am actively integrating <strong>Generative AI &amp; LLM APIs</strong> into web products, building automated workflows, and pursuing my degree at Supreme Knowledge Foundation Group of Institutions.
+            </p>
+            <div class="tech-pills-row">
+              <span class="pill">React 18</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">Express</span>
+              <span class="pill">MongoDB</span>
+              <span class="pill">REST APIs</span>
+              <span class="pill">JWT Auth</span>
+              <span class="pill">Tailwind/CSS3</span>
+            </div>
+          </div>
+
+          <!-- Bento 2: Holographic Profile Photo -->
+          <div class="bento-card bento-photo-card" data-reveal>
+            <div class="photo-container">
+              <div class="photo-ring-glow"></div>
+              <div class="photo-frame-inner">
+                <img src="profile.jpg" alt="Ratul Shee — MERN Stack Developer" class="photo-img" loading="lazy">
+                <div class="photo-scanner"></div>
+                <div class="photo-corner tl"></div>
+                <div class="photo-corner tr"></div>
+                <div class="photo-corner bl"></div>
+                <div class="photo-corner br"></div>
+              </div>
+            </div>
+            <div class="photo-caption">
+              <h4>Ratul Shee</h4>
+              <span class="caption-sub">Chandannagar, WB, India</span>
+              <div class="status-live-pill">
+                <span class="pulse-green"></span> <span>Ready to Collaborate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 3: Live IST Clock & Location -->
+          <div class="bento-card bento-time-card" data-reveal>
+            <div class="time-card-inner">
+              <div class="time-top">
+                <span class="time-icon">🌍</span>
+                <span class="time-zone-label">Chandannagar (IST)</span>
+              </div>
+              <div class="digital-clock" id="istClock">00:00:00 AM</div>
+              <div class="time-footer">
+                <span class="utc-offset">UTC +5:30</span>
+                <span class="solar-status" id="solarStatus">☀️ Day Shift</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 4: Key Numerical Metrics Counter -->
+          <div class="bento-card bento-metrics-card" data-reveal>
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <span class="metric-value counter-num" data-target="4">0</span><span class="metric-plus">+</span>
+                <span class="metric-title">Languages Mastered</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-value counter-num" data-target="100">0</span><span class="metric-plus">%</span>
+                <span class="metric-title">Clean Modern Code</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-value">2027</span>
+                <span class="metric-title">B.Tech Graduation</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-value counter-num" data-target="15">0</span><span class="metric-plus">+</span>
+                <span class="metric-title">GitHub Repos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 5: Interactive GitHub Activity Visualizer -->
+          <div class="bento-card bento-activity-card" data-reveal>
+            <div class="activity-top">
+              <div>
+                <h4>Contribution &amp; Build Activity</h4>
+                <p>Consistent daily commits, problem solving &amp; architecture design</p>
+              </div>
+              <span class="streak-badge">🔥 Active Dev</span>
+            </div>
+            <div class="commit-matrix" id="commitMatrix" aria-hidden="true">
+              <!-- Dynamically generated commit heatmap boxes -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MERN ARCHITECTURE PIPELINE -->
+    <section class="section section-alt" id="architecture">
+      <div class="section-inner">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow"><span class="idx">02</span> architecture</span>
+          <h2>The MERN Stack Flow Simulator</h2>
+          <p class="section-lead">Click any node or fire a simulated HTTP transaction to see full-stack data flow in real-time.</p>
+        </div>
+
+        <div class="architecture-visualizer" data-reveal id="archVisualizer">
+          <!-- Flow Pipeline -->
+          <div class="arch-pipeline">
+
+            <!-- Node 1: React Client -->
+            <div class="arch-node active" data-node="client" id="nodeClient">
+              <div class="node-icon-box react-glow">
+                <svg viewBox="0 0 24 24" class="node-svg"><path d="M12 9a3 3 0 100 6 3 3 0 000-6z" fill="currentColor"/><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z" fill="currentColor" opacity="0.3"/></svg>
+              </div>
+              <div class="node-info">
+                <span class="node-category">Frontend</span>
+                <h4>React 18 / SPA</h4>
+                <p>Virtual DOM, Hooks, Responsive UI</p>
+              </div>
+            </div>
+
+            <!-- Signal Wire 1 -->
+            <div class="arch-wire">
+              <div class="wire-line">
+                <div class="packet packet-1" id="packet1"></div>
+              </div>
+              <span class="wire-label">HTTPS / JSON REST</span>
+            </div>
+
+            <!-- Node 2: Node.js / Express -->
+            <div class="arch-node" data-node="server" id="nodeServer">
+              <div class="node-icon-box express-glow">
+                <svg viewBox="0 0 24 24" class="node-svg"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.2 4.8 8 12 4.8zM4 9.8l7 3.1v7.3l-7-3.5V9.8zm9 10.4v-7.3l7-3.1v6.9l-7 3.5z" fill="currentColor"/></svg>
+              </div>
+              <div class="node-info">
+                <span class="node-category">Backend API</span>
+                <h4>Node + Express.js</h4>
+                <p>JWT Auth, Routers, Middleware</p>
+              </div>
+            </div>
+
+            <!-- Signal Wire 2 -->
+            <div class="arch-wire">
+              <div class="wire-line">
+                <div class="packet packet-2" id="packet2"></div>
+              </div>
+              <span class="wire-label">Mongoose Driver</span>
+            </div>
+
+            <!-- Node 3: MongoDB Database -->
+            <div class="arch-node" data-node="database" id="nodeDatabase">
+              <div class="node-icon-box mongo-glow">
+                <svg viewBox="0 0 24 24" class="node-svg"><path d="M12 2C9 6.5 8 9.5 8 13c0 3.3 2 6 4 7 2-1 4-3.7 4-7 0-3.5-1-6.5-4-11zm0 15c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="currentColor"/></svg>
+              </div>
+              <div class="node-info">
+                <span class="node-category">Database</span>
+                <h4>MongoDB Atlas</h4>
+                <p>NoSQL Schemas, Aggregations</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Interactive Simulator Console Bar -->
+          <div class="arch-control-bar">
+            <div class="arch-status-pill">
+              <span class="status-indicator"></span>
+              <span id="archStatusMsg">Pipeline Status: Ready for transaction simulation</span>
+            </div>
+            <button class="btn btn-primary btn-sm magnetic" id="simulateReqBtn">
+              <span>▶ Send Request Packet</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Node Details Box -->
+          <div class="arch-detail-drawer" id="archDetailDrawer">
+            <div class="detail-badge" id="archDetailBadge">Frontend Layer: React</div>
+            <h4 id="archDetailTitle">Client-Side Architecture</h4>
+            <p id="archDetailDesc">
+              Components structured with declarative UI patterns, custom hooks for API state management, and CSS variables for high-contrast dark themes.
+            </p>
+            <div class="arch-code-preview">
+              <code id="archDetailCode">// Sample REST query&#10;const res = await api.post('/api/auth/login', credentials);&#10;dispatch({ type: 'AUTH_SUCCESS', payload: res.data });</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills">
+      <div class="section-inner">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow"><span class="idx">03</span> tech stack</span>
+          <h2>Tools, frameworks &amp; engineering toolkit</h2>
+          <p class="section-lead">Proven hands-on capabilities across languages, frontend frameworks, and server architectures.</p>
+        </div>
+
+        <div class="skills-grid">
+
+          <!-- Group 1: Core Languages -->
+          <div class="skill-category-card" data-reveal>
+            <div class="category-header">
+              <div class="cat-icon">💻</div>
+              <div>
+                <h3>Core Languages</h3>
+                <span>Foundational Programming</span>
+              </div>
+            </div>
+            <div class="skills-list">
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">JavaScript (ES6+)</span>
+                  <span class="skill-pct">92%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 92%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Python</span>
+                  <span class="skill-pct">80%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 80%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Java</span>
+                  <span class="skill-pct">75%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 75%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">C</span>
+                  <span class="skill-pct">70%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 70%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 2: Frontend Engineering -->
+          <div class="skill-category-card" data-reveal>
+            <div class="category-header">
+              <div class="cat-icon">⚛️</div>
+              <div>
+                <h3>Frontend Development</h3>
+                <span>User Interfaces &amp; State</span>
+              </div>
+            </div>
+            <div class="skills-list">
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">React.js &amp; Hooks</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 90%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">HTML5 / Semantic Web</span>
+                  <span class="skill-pct">95%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 95%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">CSS3 / Glassmorphism</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 90%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Responsive Design &amp; UI</span>
+                  <span class="skill-pct">92%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 92%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 3: Backend & Database -->
+          <div class="skill-category-card" data-reveal>
+            <div class="category-header">
+              <div class="cat-icon">🚀</div>
+              <div>
+                <h3>Backend &amp; Database</h3>
+                <span>APIs &amp; Persistence</span>
+              </div>
+            </div>
+            <div class="skills-list">
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Node.js Runtime</span>
+                  <span class="skill-pct">88%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 88%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Express.js Framework</span>
+                  <span class="skill-pct">88%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 88%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">MongoDB &amp; Mongoose</span>
+                  <span class="skill-pct">85%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 85%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">RESTful API Design</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 90%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 4: Tools & AI Integration -->
+          <div class="skill-category-card" data-reveal>
+            <div class="category-header">
+              <div class="cat-icon">⚡</div>
+              <div>
+                <h3>DevOps, Tools &amp; AI</h3>
+                <span>Workflow &amp; Modern Tech</span>
+              </div>
+            </div>
+            <div class="skills-list">
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Git &amp; GitHub Version Control</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 90%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Applied AI &amp; Prompt Dev</span>
+                  <span class="skill-pct">82%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 82%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">JWT &amp; Web Security</span>
+                  <span class="skill-pct">85%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 85%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info">
+                  <span class="skill-name">Postman API Testing</span>
+                  <span class="skill-pct">88%</span>
+                </div>
+                <div class="progress-track"><div class="progress-bar-fill" style="--w: 88%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SHOWCASE -->
+    <section class="section section-alt" id="projects">
+      <div class="section-inner">
+        <div class="section-head" data-reveal>
+          <div class="head-split">
+            <div>
+              <span class="eyebrow"><span class="idx">04</span> portfolio</span>
+              <h2>Featured Full-Stack Work</h2>
+              <p class="section-lead">Production-grade applications built end-to-end with the MERN stack.</p>
+            </div>
+            <!-- Category Filter Tabs -->
+            <div class="project-filters" id="projectFilters" role="tablist">
+              <button class="filter-tab active" data-filter="all">All</button>
+              <button class="filter-tab" data-filter="mern">MERN Full-Stack</button>
+              <button class="filter-tab" data-filter="react">React / UI</button>
+              <button class="filter-tab" data-filter="ai">AI / API</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- PROJECT 1: Personal Expense Manager (FinTrack) -->
+          <article class="project-card tilt-card" data-category="mern" data-reveal>
+            <div class="project-card-glow"></div>
+            <div class="project-preview-wrap">
+              <img src="fintrack.jpg" alt="FinTrack Personal Expense Manager Dashboard" class="project-img" loading="lazy">
+              <div class="preview-overlay">
+                <button class="btn btn-glass btn-sm quick-view-btn" data-project="fintrack">
+                  <span>Quick View 🔍</span>
+                </button>
+              </div>
+              <span class="project-status-tag">Full-Stack MERN</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-num">01 // FINTECH</span>
+                <span class="project-date">Active</span>
+              </div>
+
+              <h3>FinTrack — Personal Expense Manager</h3>
+              <p class="project-desc">
+                An intuitive finance manager enabling users to track expenditures, analyze category-wise spending patterns, manage budgets, and generate visual monthly health metrics.
+              </p>
+
+              <div class="project-highlights">
+                <span class="highlight-item">✓ Secure JWT Authentication &amp; Sessions</span>
+                <span class="highlight-item">✓ Category Breakdown &amp; Spending Charts</span>
+                <span class="highlight-item">✓ Monthly Summaries &amp; Balance Analytics</span>
+              </div>
+
+              <div class="project-tags">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>MongoDB</span>
+                <span>REST API</span>
+              </div>
+
+              <div class="project-card-actions">
+                <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm magnetic">
+                  <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <button class="btn btn-primary btn-sm magnetic quick-view-btn" data-project="fintrack">
+                  <span>Specs ➔</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: Blog Post Manager (DevPulse) -->
+          <article class="project-card tilt-card" data-category="mern" data-reveal>
+            <div class="project-card-glow"></div>
+            <div class="project-preview-wrap">
+              <img src="devpulse.jpg" alt="DevPulse Content Studio & Blog CMS" class="project-img" loading="lazy">
+              <div class="preview-overlay">
+                <button class="btn btn-glass btn-sm quick-view-btn" data-project="devpulse">
+                  <span>Quick View 🔍</span>
+                </button>
+              </div>
+              <span class="project-status-tag">Content Platform</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-num">02 // CMS &amp; PUBLISHING</span>
+                <span class="project-date">Active</span>
+              </div>
+
+              <h3>DevPulse — MERN Content Studio</h3>
+              <p class="project-desc">
+                A modern blog management platform featuring split-view Markdown authoring, tag indexing, role-based edit permissions, and SEO-friendly slug generation.
+              </p>
+
+              <div class="project-highlights">
+                <span class="highlight-item">✓ Split-Pane Markdown Editor &amp; Preview</span>
+                <span class="highlight-item">✓ Author Permissions &amp; Full CRUD Pipeline</span>
+                <span class="highlight-item">✓ Fast MongoDB Indexing &amp; Query Caching</span>
+              </div>
+
+              <div class="project-tags">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>MongoDB</span>
+                <span>Markdown</span>
+              </div>
+
+              <div class="project-card-actions">
+                <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm magnetic">
+                  <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <button class="btn btn-primary btn-sm magnetic quick-view-btn" data-project="devpulse">
+                  <span>Specs ➔</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 3: PromptMatrix AI Workspace -->
+          <article class="project-card tilt-card" data-category="ai" data-reveal>
+            <div class="project-card-glow"></div>
+            <div class="project-preview-wrap fallback-preview">
+              <div class="ai-mockup-graphic">
+                <div class="ai-pulse-center"></div>
+                <div class="ai-matrix-code">
+                  <span>&gt; AI Prompt Engine initialized</span>
+                  <span>&gt; Streaming tokens: 2.4k/s</span>
+                  <span>&gt; Latency: 18ms</span>
+                </div>
+              </div>
+              <div class="preview-overlay">
+                <button class="btn btn-glass btn-sm quick-view-btn" data-project="promptmatrix">
+                  <span>Quick View 🔍</span>
+                </button>
+              </div>
+              <span class="project-status-tag">AI / API Suite</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-num">03 // AI DEV TOOLING</span>
+                <span class="project-date">Active Prototype</span>
+              </div>
+
+              <h3>PromptMatrix — LLM Prompt Studio</h3>
+              <p class="project-desc">
+                An intelligent developer workbench for designing, testing, and versioning system prompts with real-time token cost calculators and API streaming endpoints.
+              </p>
+
+              <div class="project-highlights">
+                <span class="highlight-item">✓ Server-Sent Events (SSE) Streaming</span>
+                <span class="highlight-item">✓ Prompt Versioning &amp; Diff Comparison</span>
+                <span class="highlight-item">✓ MongoDB Collections for Preset Libraries</span>
+              </div>
+
+              <div class="project-tags">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>OpenAI API</span>
+                <span>MongoDB</span>
+                <span>Tailwind</span>
+              </div>
+
+              <div class="project-card-actions">
+                <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm magnetic">
+                  <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <button class="btn btn-primary btn-sm magnetic quick-view-btn" data-project="promptmatrix">
+                  <span>Specs ➔</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & TIMELINE -->
+    <section class="section" id="education">
+      <div class="section-inner">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow"><span class="idx">05</span> timeline</span>
+          <h2>Education &amp; Academic Journey</h2>
+          <p class="section-lead">The academic milestones shaping my engineering fundamentals.</p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-path">
+            <div class="timeline-progress-glow" id="timelineProgress"></div>
+          </div>
+
+          <!-- Item 1: Degree -->
+          <div class="timeline-entry" data-reveal>
+            <div class="timeline-marker">
+              <div class="marker-core"></div>
+            </div>
+            <div class="timeline-card">
+              <div class="entry-header">
+                <span class="entry-dates">2024 — 2027</span>
+                <span class="entry-badge active-badge">In Progress</span>
+              </div>
+              <h3>Supreme Knowledge Foundation Group of Institutions</h3>
+              <p class="entry-degree">Bachelor of Technology (B.Tech) Degree Program</p>
+              <p class="entry-desc">
+                Specializing in computer systems, algorithms, database architectures, and software engineering. Building full-stack web applications alongside rigorous coursework.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2: Higher Secondary -->
+          <div class="timeline-entry" data-reveal>
+            <div class="timeline-marker">
+              <div class="marker-core"></div>
+            </div>
+            <div class="timeline-card">
+              <div class="entry-header">
+                <span class="entry-dates">Higher Secondary</span>
+                <span class="entry-badge">Completed</span>
+              </div>
+              <h3>Nawpara High School</h3>
+              <p class="entry-degree">Higher Secondary Education (Science &amp; Mathematics)</p>
+              <p class="entry-desc">
+                Developed analytical thinking, mathematical foundations, and early programming fundamentals.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3: Secondary Schooling -->
+          <div class="timeline-entry" data-reveal>
+            <div class="timeline-marker">
+              <div class="marker-core"></div>
+            </div>
+            <div class="timeline-card">
+              <div class="entry-header">
+                <span class="entry-dates">Class 5 — 10</span>
+                <span class="entry-badge">Completed</span>
+              </div>
+              <h3>Kanailal Vidyamandir (F.S)</h3>
+              <p class="entry-degree">Secondary Schooling</p>
+              <p class="entry-desc">
+                Built core foundation in sciences, language, logic, and early computer literacy.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & COLLABORATION -->
+    <section class="section section-alt contact-section" id="contact">
+      <div class="section-inner">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow"><span class="idx">06</span> get in touch</span>
+          <h2>Let's build something extraordinary together.</h2>
+          <p class="section-lead">Have an exciting project, role, or collaboration in mind? My inbox is always open.</p>
+        </div>
+
+        <div class="contact-layout">
+
+          <!-- Left: Direct Channels -->
+          <div class="contact-info-panel" data-reveal>
+            <div class="contact-card-modern">
+              <div class="contact-card-icon">✉️</div>
+              <div class="contact-card-body">
+                <span class="channel-title">Direct Email</span>
+                <a href="mailto:ratulshee6@gmail.com" class="channel-value">ratulshee6@gmail.com</a>
+              </div>
+              <button class="copy-action-btn magnetic copy-email-btn" data-email="ratulshee6@gmail.com" title="Copy to clipboard">
+                <svg viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="contact-card-modern">
+              <div class="contact-card-icon">🐙</div>
+              <div class="contact-card-body">
+                <span class="channel-title">GitHub Profile</span>
+                <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" class="channel-value">github.com/Ratul-Shee</a>
+              </div>
+              <a href="https://github.com/Ratul-Shee/" target="_blank" rel="noopener" class="copy-action-btn magnetic" title="Open link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </a>
+            </div>
+
+            <div class="contact-card-modern">
+              <div class="contact-card-icon">💼</div>
+              <div class="contact-card-body">
+                <span class="channel-title">LinkedIn Network</span>
+                <a href="https://www.linkedin.com/in/ratul-shee/" target="_blank" rel="noopener" class="channel-value">linkedin.com/in/ratul-shee</a>
+              </div>
+              <a href="https://www.linkedin.com/in/ratul-shee/" target="_blank" rel="noopener" class="copy-action-btn magnetic" title="Open link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </a>
+            </div>
+
+            <div class="contact-card-modern">
+              <div class="contact-card-icon">🐦</div>
+              <div class="contact-card-body">
+                <span class="channel-title">Twitter / X</span>
+                <a href="https://x.com/RATUL_SHEE_666" target="_blank" rel="noopener" class="channel-value">@RATUL_SHEE_666</a>
+              </div>
+              <a href="https://x.com/RATUL_SHEE_666" target="_blank" rel="noopener" class="copy-action-btn magnetic" title="Open link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </a>
+            </div>
+
+            <div class="contact-card-modern">
+              <div class="contact-card-icon">📘</div>
+              <div class="contact-card-body">
+                <span class="channel-title">Facebook Profile</span>
+                <a href="https://www.facebook.com/ratul.shee.6/" target="_blank" rel="noopener" class="channel-value">facebook.com/ratul.shee.6</a>
+              </div>
+              <a href="https://www.facebook.com/ratul.shee.6/" target="_blank" rel="noopener" class="copy-action-btn magnetic" title="Open link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </a>
+            </div>
+
+            <div class="contact-guarantee-box">
+              <span class="guarantee-icon">⚡</span>
+              <div>
+                <strong>Guaranteed Quick Response</strong>
+                <p>Usually responds within 12–24 hours.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Message Form -->
+          <div class="contact-form-panel" data-reveal>
+            <form class="glass-form" id="contactForm" novalidate>
+              <div class="form-title-bar">
+                <h3>Send a Direct Message</h3>
+                <span class="form-dot-live">● Live Form</span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="formName">Your Name <span class="req">*</span></label>
+                  <input type="text" id="formName" name="name" class="form-input" placeholder="e.g. Sarah Connor" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                  <label for="formEmail">Email Address <span class="req">*</span></label>
+                  <input type="email" id="formEmail" name="email" class="form-input" placeholder="sarah@example.com" required autocomplete="email">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="formSubject">Subject</label>
+                <input type="text" id="formSubject" name="subject" class="form-input" placeholder="Project inquiry / Full-stack opportunity">
+              </div>
+
+              <div class="form-group">
+                <label for="formMsg">Message <span class="req">*</span></label>
+                <textarea id="formMsg" name="message" class="form-textarea" rows="4" placeholder="Tell me about your project, timeline, or idea..." required></textarea>
+                <div class="form-char-count"><span id="charCount">0</span>/500 characters</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit magnetic" id="submitBtn">
+                <span class="btn-text">Send Message 🚀</span>
+                <span class="btn-loading-spinner" aria-hidden="true"></span>
+              </button>
+
+              <div class="form-status-alert" id="formAlert" aria-live="polite"></div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODERN FOOTER -->
+  <footer class="footer">
+    <div class="section-inner footer-inner">
+      <div class="footer-left">
+        <a href="#hero" class="logo-small">
+          <span class="logo-bracket">&lt;</span>Ratul<span class="logo-accent">.Shee</span><span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-copy">&copy; <span id="year">2026</span> Ratul Shee. Built with precision, performance &amp; passion for the MERN stack.</p>
+      </div>
+
+      <div class="footer-center">
+        <span class="cmd-shortcut-hint">Press <kbd>Ctrl</kbd> + <kbd>K</kbd> for quick command palette</span>
+      </div>
+
+      <div class="footer-right">
+        <a href="#hero" class="footer-top-btn magnetic" aria-label="Scroll back to top">
+          <span>Back to top</span>
+          <svg viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
